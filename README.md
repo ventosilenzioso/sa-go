@@ -1,97 +1,99 @@
 ![SA:GO](sa_go.png)
 
-# SA:GO — Server SA-MP 0.3.7 Modern, Ringan, dan Stabil
+# SA:GO — The Modern, Lightweight, and Rock-Solid SA-MP 0.3.7 Server
 
-Selamat datang di era baru pengelolaan server San Andreas Multiplayer. **SA:GO** hadir sebagai solusi server SA-MP 0.3.7 modern yang dirancang khusus untuk para pemilik dan operator server yang menginginkan performa terbaik tanpa membebani perangkat keras. Diciptakan dari lembaran kosong dengan fokus tunggal pada efisiensi tinggi dan keandalan tanpa kompromi, SA:GO memungkinkan Anda menjalankan komunitas impian—mulai dari server komunitas intim hingga server berkapasitas besar—dengan penggunaan memori yang luar biasa hemat serta stabilitas yang kokoh setiap detiknya.
+Welcome to a new era of San Andreas Multiplayer server hosting. **SA:GO** is a clean, modern SA-MP 0.3.7 server engineered from the ground up for server owners and community operators who demand stellar performance, uncompromising stability, and minimal hardware footprint. Whether you are running a tight-knit roleplay community or scaling a bustling multi-gamemode hub, SA:GO empowers you to deliver an unforgettable player experience without the overhead of massive system resources.
 
-Bagi operator server, kekhawatiran terbesar sering kali berpusat pada biaya sewa VPS yang membengkak, lag yang mengganggu kenyamanan pemain, atau server yang tiba-tiba melambat setelah beroperasi beberapa jam. SA:GO melenyapkan seluruh kekhawatiran tersebut. Server Anda dapat beroperasi mulus di atas VPS paling terjangkau sekalipun, menyajikan pengalaman bermain yang instan, responsif, dan bebas hambatan bagi setiap pemain yang terhubung.
-
----
-
-## Terbukti Andal: Performa dan Stabilitas Tanpa Kompromi
-
-Keunggulan SA:GO bukan sekadar janji di atas kertas, melainkan fakta yang telah teruji dan tervalidasi secara ketat. Dalam pengujian performa yang komprehensif, server ini mencatatkan waktu respon pengiriman obrolan (*chat latency*) di kisaran sub-milidetik, dengan median berkisar antara 0.6 hingga 0.8 milidetik. Angka ini memastikan percakapan antar pemain dan respon perintah terasa seketika tanpa jeda yang mengganggu ritme permainan.
-
-Kecepatan ini juga tercermin langsung saat pemain memasuki dunia permainan. Pemain hanya membutuhkan waktu sekitar 8 milidetik sejak tombol *spawn* ditekan hingga karakter mereka benar-benar berdiri di dalam dunia permainan. Pengalaman masuk yang secepat kedipan mata ini membuat pemain Anda merasa disambut dengan kualitas produksi server kelas atas.
-
-Di sisi ketahanan jangka panjang, pengujian beban tanpa henti (*soak test*) selama lima jam penuh dengan lima puluh koneksi pemain aktif membuktikan ketangguhan sejati SA:GO. Sepanjang lima jam simulasi interaksi intensif tersebut, profil penggunaan memori server bertahan stabil di kisaran 15 megabita tanpa kenaikan akumulatif sama sekali. Tidak ada kebocoran memori (*memory leak*), tidak ada penurunan laju pemrosesan, dan tidak ada kelelahan performa. Server tetap gesit dan segar dari jam pertama hingga jam-jam berikutnya, memberikan Anda ketenangan penuh saat membiarkan komunitas bermain siang dan malam.
+For server operators, the biggest headaches are often runaway hosting bills, frustrating player lag, or servers that mysteriously degrade in performance after hours of continuous runtime. SA:GO eliminates these concerns completely. Your server runs smoothly on the most modest VPS instances, delivering instantaneous, low-latency, and crash-resilient gameplay around the clock.
 
 ---
 
-## Fitur Lengkap untuk Membangun Dunia Tanpa Batas
+## Proven Reliability: Validated Performance & Zero-Leak Stability
 
-SA:GO menyediakan seluruh fondasi yang Anda butuhkan untuk membangun mode permainan apa pun, mulai dari roleplay mendalam, aksi perang geng, hingga balapan jalanan yang kompetitif. Seluruh fitur terintegrasi secara harmonis untuk memanjakan developer maupun pemain:
+SA:GO's advantages are backed by rigorous, real-world stress testing. In comprehensive performance benchmarks, SA:GO consistently demonstrates sub-millisecond in-game communication latency, clocking a median chat round-trip time between **0.6 ms and 0.8 ms**. Player interactions and commands register immediately without perceptible delays.
 
-- **Autentikasi Pemain & Pemilihan Karakter Sinematik:** Sambut pemain baru dengan sistem pendaftaran dan login berbasis enkripsi kata sandi yang aman. Antarmuka pemilihan karakter terhubung dengan kamera sinematik yang membingkai karakter secara elegan saat pemain memilih busana mereka dengan tombol navigasi.
-- **Sistem Dialog Lengkap:** Komunikasi dua arah dengan pemain menjadi sangat mudah melalui kotak dialog serbaguna, mulai dari dialog informasi, kotak isian teks (*input box*), menu daftar pilihan (*list item*), hingga dialog kata sandi berkeamanan tinggi.
-- **TextDraw & HUD Kustom:** Bangun tampilan antarmuka visual apa pun yang ada di benak Anda. Dari speedometer kendaraan, tampilan status pemain, kompas, hingga radar kustom, semuanya dapat diposisikan secara presisi pada kanvas virtual klasik 640x480.
-- **Sistem Tim yang Fleksibel:** Buat fraksi kepolisian, kelompok medis, keluarga mafia, atau regu tempur dengan warna nametag dan aturan interaksi yang dapat diatur sepenuhnya sesuai visi permainan Anda.
-- **Pertarungan Responsif & Tembakan Presisi:** Setiap baku tembak terasa memuaskan berkat sinkronisasi proyektil dan arah bidikan yang akurat. Deteksi benturan peluru dan perhitungan kerusakan tubuh berlangsung responsif tanpa fenomena peluru yang tembus sia-sia.
-- **Arsenal Senjata Menyeluruh:** Seluruh persenjataan yang dikenal dalam SA-MP didukung secara tuntas, mulai dari senjata jarak dekat, pistol, senapan gentel (*shotgun*), senapan otomatis, senjata berat, bahan peledak, hingga perlengkapan khusus seperti parasut dan alat pemadam kebakaran.
-- **Sinkronisasi Kendaraan Mulus:** Nikmati iring-iringan kendaraan yang stabil tanpa fenomena teleportasi atau patah-patah (*rubberbanding*). Sinkronisasi mencakup pengemudi utama, seluruh posisi penumpang, hingga gandengan truk (*trailer*) yang terhubung rapi.
-- **Kerusakan & Kehancuran Realistis:** Sistem kerusakan kendaraan mencerminkan benturan nyata dengan pelacakan status pintu, panel bodi, lampu, serta ban yang kempis atau pecah, lengkap dengan transisi ledakan yang dramatis saat kendaraan mencapai batas daya tahannya.
-- **Checkpoint & Balapan:** Pandu pemain dalam misi pengantaran, rute patroli, atau kejuaraan balap menggunakan checkpoint bulat klasik maupun checkpoint balapan berpemandu arah panah.
-- **Aktor NPC Bernyawa:** Hidupkan suasana kota dengan karakter NPC statis yang dapat memainkan berbagai animasi gerakan untuk berperan sebagai penjaga toko, warga kota, atau petugas keamanan tanpa menghabiskan slot pemain.
-- **Zona Wilayah & Peta Berwarna:** Kuasai Los Santos dengan *gangzone* berwarna di radar peta untuk menandai wilayah kekuasaan geng, zona aman, atau area terlarang dengan efek kedipan yang menarik perhatian.
-- **Label Teks Melayang 3D:** Tempatkan teks informatif dengan warna cerah di atas kepala karakter, di bodi kendaraan, atau melayang di titik koordinat dunia tertentu sebagai penanda interaksi lingkungan.
-- **Kamera Sinematik Bebas:** Arahkan pandangan pemain untuk intro server yang memukau, tur keliling kota, atau cuplikan dramatis menggunakan pergerakan kamera melayang yang mulus dari satu titik ke titik lainnya.
-- **Dukungan Basis Data Modern:** Simpan seluruh data akun, inventaris, kepemilikan aset, dan log server secara andal dengan dukungan terintegrasi untuk SQLite yang siap pakai langsung maupun MySQL untuk infrastruktur terdistribusi.
+This responsiveness carries straight into the world entry flow. When a player clicks the spawn button, they are positioned in the world in roughly **8 milliseconds**, providing an instantaneous transition that feels refined and premium.
+
+On long-term endurance, a continuous 5-hour soak test with 50 concurrent bot connections validated SA:GO's rock-solid operational stability. Throughout five straight hours of relentless network traffic and active player synchronization, server memory consumption remained flat at approximately **15 megabytes** with absolutely zero memory leakage, zero garbage collection pauses, and zero throughput degradation. The server runs as briskly and cleanly on hour five as it did in its opening seconds.
 
 ---
 
-## Perintah Bawaan Siap Pakai & Kemudahan Scripting
+## Feature-Rich World Building
 
-SA:GO langsung siap dijalankan sejak detik pertama Anda mengekstraknya. Gamemode contoh resmi yang disertakan telah dilengkapi serangkaian perintah dasar yang esensial untuk kebutuhan administrasi dan uji coba:
+SA:GO provides a comprehensive suite of built-in features, enabling developers to build any gamemode imaginable—from hardcore roleplay and cops-and-robbers to intense gang wars and street racing:
 
-- `/veh <model> <warna1> <warna2>` — Memunculkan kendaraan apa pun langsung di hadapan Anda.
-- `/giveweapon <id> <peluru>` — Membekali pemain dengan senjata dan amunisi pilihan.
-- `/heal` — Memulihkan kesehatan dan pelindung tubuh (*armour*) secara instan.
-- `/setadmin` — Mengaktifkan hak akses administratif untuk sesi pengujian.
-- `/kick <id> [alasan]` — Mengeluarkan pemain yang melanggar aturan secara tertib.
-- `/ban <id> [alasan]` — Memblokir akses pemain yang melakukan pelanggaran berat.
-- `/say <pesan>` — Mengirimkan pengumuman resmi admin ke seluruh pemain di server.
-- `/help` — Menampilkan daftar perintah yang dapat diakses oleh pemain.
-
-Seluruh perintah ini dan ribuan variasi lainnya dapat Anda kembangkan dengan mudah melalui antarmuka scripting Lua modern yang bersih (`sa.*`). Pengembang gamemode memiliki kebebasan penuh untuk meracik aturan main mereka sendiri dengan memanfaatkan pustaka fungsi terstruktur yang mencakup:
-
-1. **Pengelolaan Pemain:** Posisi, kesehatan, perlengkapan, skin, sudut hadap, status admin, dan uang.
-2. **Kendaraan:** Pembuatan, pemusnahan, kondisi kerusakan visual, kesehatan mesin, dan koordinat.
-3. **Persenjataan & Pertarungan:** Pemberian senjata, manajemen amunisi, dan deteksi tembakan.
-4. **Antarmuka Visual:** Dialog interaktif, TextDraw global, serta TextDraw per-pemain.
-5. **Dunia & Lingkungan:** Checkpoint balapan, aktor NPC, zona wilayah, dan label teks 3D.
-6. **Kamera:** Penempatan posisi kamera statis, kamera mengikuti pemain, dan interpolasi sinematik melayang.
-7. **Penyimpanan Data:** Kueri dan eksekusi basis data secara sinkron maupun asinkron berkecepatan tinggi.
+- **Secure Authentication & Cinematic Character Selection:** Protect player accounts with cryptographic bcrypt password hashing out of the box. Welcome players with cinematic camera angles that smoothly frame character previews as players cycle through skins with PREV and NEXT buttons.
+- **Versatile Dialog System:** Communicate interactively using full dialog support, including informational message boxes, single-line text inputs, item selection lists, multi-column tablists, and masked password prompts.
+- **Custom TextDraws & HUD Elements:** Design bespoke visual interfaces on the classic 640x480 virtual canvas. Create speedometers, radar overlays, hunger bars, notification badges, and interactive click-to-select menus using both global and per-player TextDraws.
+- **Flexible Team Framework:** Establish police departments, emergency medical services, rival street gangs, or tactical squads with customizable nametag colors, friendly fire rules, and team mechanics.
+- **Crisp Combat & Precision Bullet Sync:** Firefights feel tight and satisfying thanks to high-fidelity weapon shot tracking, hit position reporting, and synchronized aiming vectors with accurate hit registration.
+- **Complete SA-MP Weapon Arsenal:** Fully supports every weapon category in GTA: San Andreas—melee weapons, handguns, shotguns, submachine guns, assault rifles, heavy ordnance, thrown explosives, and utility gear like parachutes and fire extinguishers.
+- **Fluid Vehicle & Trailer Synchronization:** High-speed pursuits and convoys run smoothly without jitter, warping, or rubberbanding. Synchronization accommodates drivers, passengers in every seat, and hitch-connected trailers.
+- **Realistic Vehicle Damage & Destruction:** Features granular damage tracking covering individual door panels, engine hoods, bumpers, headlights, and punctured tires, culminating in dramatic vehicle explosions when health reaches zero.
+- **Standard & Race Checkpoints:** Direct player journeys, delivery routes, and competitive tournaments with traditional ground cylinders or arrow-guided race checkpoints.
+- **Living World Actors (NPCs):** Populate streets, shopfronts, and checkpoints with ambient non-player character models that play looping animations, face custom angles, and take damage without consuming player slots.
+- **Dynamic Gang Zones:** Mark neighborhood territories, hazard perimeters, and safe zones on the radar map with custom RGBA colors and attention-grabbing flashing animations.
+- **3D Text World Labels:** Attach floating informative labels to world coordinates, player heads, or vehicle roofs with customizable view distances and line-of-sight tests.
+- **Cinematic Interpolated Cameras:** Direct breathtaking flybys, intro cutscenes, and dramatic transitions using smooth point-to-point camera position and look-at interpolation.
+- **Built-in Database Storage:** Persist player profiles, vehicle ownership, inventory, and economy data reliably with out-of-the-box support for embedded SQLite as well as MySQL drivers.
 
 ---
 
-## Memulai Server
+## Out-of-the-Box Commands & Lua Scripting
 
-Menjalankan SA:GO sangatlah mudah di lingkungan mana pun yang Anda pilih:
+SA:GO comes ready to run with an official starter gamemode (`Gamemodes/bare.lua`) featuring essential gameplay and moderation commands:
 
-### Linux (Ubuntu / Debian / CentOS)
-1. Salin seluruh isi paket rilis ke direktori kerja pilihan Anda di VPS.
-2. Berikan izin eksekusi pada binary server:
+- `/veh <model> <color1> <color2>` — Spawns any vehicle model directly at the player's position.
+- `/giveweapon <id> <ammo>` — Equips a player with any valid weapon ID and ammunition count.
+- `/heal` — Replenishes health and armour to 100%.
+- `/setadmin` — Enables administrative privileges for testing.
+- `/kick <id> [reason]` — Disconnects rule-breaking players cleanly.
+- `/ban <id> [reason]` — Blocks persistent offenders from reconnecting.
+- `/say <message>` — Broadcasts administrative server announcements to all players.
+- `/help` — Displays available commands to connected players.
+
+Every single behavior is customizable and extensible through a clean Lua scripting interface under the `sa.*` namespace. Developers have full programmatic access across eight core categories:
+1. **Player Operations** (attributes, health, armour, skins, velocity, positioning, admin state)
+2. **Vehicle Operations** (creation, health, visual damage status, passenger management)
+3. **Weaponry & Combat** (inventory manipulation, ammo limits, weapon metadata)
+4. **Interface Elements** (interactive dialogs, global & player TextDraws, click selection)
+5. **World & Environment** (checkpoints, race checkpoints, actors, gang zones, 3D text labels)
+6. **Cinematics** (static cameras, behind-player tracking, floating smooth interpolation)
+7. **Database Storage** (synchronous and non-blocking asynchronous database queries)
+8. **Security & Cryptography** (bcrypt password hashing, verification, secure token generation)
+
+For the complete API reference with parameter types and code examples, see [SCRIPTING.md](SCRIPTING.md).
+
+---
+
+## Quick Start
+
+Getting your SA:GO server running takes less than a minute on any modern platform:
+
+### Linux (Ubuntu / Debian / CentOS / Arch)
+1. Extract or clone the release package to your server directory.
+2. Grant execution permissions to the server binary:
    ```bash
    chmod +x Bin/sa-go-server
    ```
-3. Sesuaikan pengaturan dasar di `server.cfg` (nama server, kata sandi RCON, dan slot pemain).
-4. Jalankan server:
+3. Edit `server.cfg` to set your desired server name, player slots, and RCON password.
+4. Start the server:
    ```bash
    ./Bin/sa-go-server -cfg server.cfg -gamemode Gamemodes/bare.lua
    ```
 
 ### Windows
-1. Buka folder kerja hasil ekstraksi.
-2. Buka `server.cfg` menggunakan editor teks favorit Anda dan sesuaikan konfigurasinya.
-3. Jalankan server melalui Command Prompt atau PowerShell:
+1. Extract the release folder to your preferred directory.
+2. Edit `server.cfg` using any text editor.
+3. Launch the server from Command Prompt, PowerShell, or by double-clicking:
    ```cmd
    Bin\sa-go-server.exe -cfg server.cfg -gamemode Gamemodes/bare.lua
    ```
 
 ---
 
-## Lisensi & Ketentuan Penggunaan
+## License & Usage
 
-SA:GO adalah perangkat lunak tertutup (*proprietary*) yang disediakan secara gratis dalam bentuk biner siap pakai (*ready-to-run*). Anda memiliki kebebasan penuh untuk mengunduh, menjalankan, mengonfigurasi, dan menggunakan server ini untuk menyelenggarakan komunitas permainan SA-MP Anda, baik untuk keperluan hobi maupun operasional server publik berjangka panjang.
+SA:GO is proprietary, closed-source software provided free of charge as ready-to-run binaries. Server operators and community owners are granted full permission to deploy, run, and host SA:GO for their multiplayer communities, whether for hobbyist groups or large-scale public deployments.
 
-Bangun komunitas Anda di atas fondasi yang lebih cepat, lebih ringan, dan lebih kokoh bersama SA:GO. Selamat berkarya di San Andreas!
+Build your community on a faster, lighter, and more dependable foundation with SA:GO. Welcome to San Andreas!
