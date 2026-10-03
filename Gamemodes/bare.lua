@@ -7,9 +7,7 @@
 --   4. Baseline anticheat speed guards with vehicle exit grace.
 --   5. Standard administrative and gameplay commands.
 
--- ============================================================================
 -- Configuration & Coordinates
--- ============================================================================
 
 local SPAWN = { x = 1958.4, y = 1343.2, z = 15.4, angle = 270.0 }
 local SELECT = { x = 1978.0, y = 1343.0, z = 15.0 }
@@ -33,9 +31,7 @@ local TELEPORT_JUMP = 300.0
 local STRIKE_WINDOW = 5.0
 local MAX_STRIKES = 5
 
--- ============================================================================
 -- State & Database
--- ============================================================================
 
 local loggedIn = {}
 local accountName = {}
@@ -81,9 +77,7 @@ local function recordStrike(id, now)
     return #kept
 end
 
--- ============================================================================
 -- Authentication Flow
--- ============================================================================
 
 local function showRegister(id)
     sa.ShowPlayerDialog(id, DIALOG_REGISTER, 3, "SA:GO Register",
@@ -226,9 +220,7 @@ function onDialogResponse(id, dialogID, response, listitem, inputtext)
     end
 end
 
--- ============================================================================
 -- Character Selection Flow
--- ============================================================================
 
 -- Gate character selection behind successful authentication.
 function onPlayerRequestClass(id, classID)
@@ -247,9 +239,7 @@ function onPlayerRequestClassDone(id, classID, skin)
     sa.SetPlayerCameraLookAt(id, SELECT_LOOK.x, SELECT_LOOK.y, SELECT_LOOK.z, 2)
 end
 
--- ============================================================================
 -- Spawn & Death Flow
--- ============================================================================
 
 function onPlayerRequestSpawn(id)
     if not loggedIn[id] then return false end
@@ -282,9 +272,7 @@ function onPlayerDeath(id, killerID, reason)
     sa.SendClientMessage(id, 0xFF4444FF, "You died. You will respawn shortly.")
 end
 
--- ============================================================================
 -- Movement & Anticheat Guards
--- ============================================================================
 
 function onPlayerUpdate(id, data)
     if data.teleported or data.inVehicle then
@@ -345,9 +333,7 @@ function onPlayerText(id, text)
     return false
 end
 
--- ============================================================================
 -- Commands
--- ============================================================================
 
 function onPlayerCommand(id, command, params)
     -- --- General / Help Commands ---
