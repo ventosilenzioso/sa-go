@@ -8,13 +8,29 @@ For server operators, the biggest headaches are often runaway hosting bills, fru
 
 ---
 
-## Proven Reliability: Validated Performance & Zero-Leak Stability
+## Proven Reliability & Benchmark Comparison
 
-SA:GO's advantages are backed by rigorous, real-world stress testing. In comprehensive performance benchmarks, SA:GO consistently demonstrates sub-millisecond in-game communication latency, clocking a median chat round-trip time between **0.6 ms and 0.8 ms**. Player interactions and commands register immediately without perceptible delays.
+SA:GO's performance advantages are backed by rigorous, real-world head-to-head stress testing against **open.mp (v1.5.8.3079)** using the identical multi-bot benchmarking harness on the same host environment.
 
-This responsiveness carries straight into the world entry flow. When a player clicks the spawn button, they are positioned in the world in roughly **8 milliseconds**, providing an instantaneous transition that feels refined and premium.
+### Head-to-Head Performance: SA:GO vs open.mp
 
-On long-term endurance, a continuous 5-hour soak test with 50 concurrent bot connections validated SA:GO's rock-solid operational stability. Throughout five straight hours of relentless network traffic and active player synchronization, server memory consumption remained flat at approximately **15 megabytes** with absolutely zero memory leakage, zero garbage collection pauses, and zero throughput degradation. The server runs as briskly and cleanly on hour five as it did in its opening seconds.
+| Benchmark Scenario | Server | Connected Bots | Spawn Time (p50) | Chat Latency (p50) | Throughput | Result |
+|---|---|---|---|---|---|---|
+| **20 Bots**<br>*(Baseline Load)* | **SA:GO** | **20 / 20 (100%)** | **8.5 ms** | **0.6 ms** | **1,586 msg/s** | **Stable** (~5× throughput) |
+| | open.mp | 20 / 20 (100%) | 120.2 ms | 20.7 ms | 329 msg/s | High latency & jitter |
+| **50 Bots**<br>*(Heavy Concurrency)* | **SA:GO** | **50 / 50 (100%)** | **10.2 ms** | **1.9 ms** | **3,453 msg/s** | **Stable** (sub-2ms response) |
+| | open.mp | 31 / 50 (62%) | 140.9 ms | 26.4 ms | 77 msg/s | Degraded (38% connection drop) |
+| **100 Bots**<br>*(Extreme Stress)* | **SA:GO** | **100 / 100 (100%)** | **18.4 ms** | **5.8 ms** | **2,610 msg/s** | **Stable** (100% completion) |
+| | open.mp | 31 / 100 (31%) | 143.9 ms | 24.5 ms | 46 msg/s | Collapsed (69% connection drop) |
+| **50 Bots**<br>*(Flaky WAN: 5% Loss + Jitter)* | **SA:GO** | **50 / 50 (100%)** | **270.5 ms** | **63.4 ms** | **267 msg/s** | **Stable** (~17× throughput) |
+| | open.mp | 27 / 50 (54%) | 309.5 ms | 73.5 ms | 16 msg/s | Broken (46% timed out) |
+
+#### Key Performance Takeaways
+- **~14× Faster World Entry:** SA:GO places players in the game world in just 8–18 ms versus 120–144 ms on open.mp.
+- **Up to 35× Lower Communication Latency:** Sub-millisecond internal processing (0.6 ms median) delivers instantaneous player interactions and command response.
+- **Up to 56× Greater Throughput Under Extreme Load:** When network traffic surges with 100 concurrent clients, SA:GO maintains over 2,600 broadcast messages per second with zero dropped players, while open.mp drops 69% of connections and degrades to 46 msg/s.
+- **Rock-Solid Packet Loss Tolerance:** Under simulated adverse wireless conditions (5% packet loss, packet reordering, 5–60 ms jitter), SA:GO retains 100% of connections with 17× higher throughput.
+- **Zero-Leak Long-Term Endurance:** A continuous 5-hour soak test with 50 concurrent connections verified a flat ~15 MB memory footprint with zero memory leakage, zero garbage collection pauses, and zero throughput degradation.
 
 ---
 
