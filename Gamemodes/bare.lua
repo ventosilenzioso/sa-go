@@ -7,6 +7,13 @@
 --   4. Baseline anticheat speed guards with vehicle exit grace.
 --   5. Standard administrative and gameplay commands.
 
+-- Global server flags set once at gamemode start (before any player connects).
+-- DisableInteriorEnterExits removes the yellow interior enter/exit markers
+-- everywhere. Like SA-MP's native, it is global and only takes effect for
+-- connections made AFTER the call, so it must be called here at the top of the
+-- script -- never mid-game.
+sa.DisableInteriorEnterExits()
+
 -- Configuration & Coordinates
 
 local SPAWN = { x = 1958.4, y = 1343.2, z = 15.4, angle = 270.0 }

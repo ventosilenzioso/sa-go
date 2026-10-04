@@ -206,6 +206,31 @@ Closes any active dialog prompt for the player.
 
 ---
 
+## Global Server Flags
+
+### `sa.DisableInteriorEnterExits()`
+Sets the global `InitGame` (139) `DisableEnterExits` flag, removing the yellow
+interior enter/exit markers everywhere — the SA:GO equivalent of SA-MP's
+`DisableInteriorEnterExits()`.
+
+- **Returns:** `ok` (boolean)
+
+**Important behavior — call it once, at the top of your gamemode:**
+- The flag is **global** and is carried in the `InitGame` packet the server
+  sends to each player on connect.
+- Changing it only affects players who connect **after** the call. Players who
+  are already connected are **not** affected (their client keeps the setting it
+  received at join time). This mirrors the original SA-MP semantics exactly.
+- Therefore it should be invoked **once during gamemode initialization**, never
+  mid-game.
+
+```lua
+-- top of your gamemode, before any player has connected
+sa.DisableInteriorEnterExits()
+```
+
+---
+
 ## User Interface: TextDraws
 
 TextDraws operate on the canonical 640.0 x 480.0 virtual canvas.
