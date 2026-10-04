@@ -28,6 +28,16 @@ local DIALOG_LOGIN = 200
 local DIALOG_REGISTER = 201
 local DIALOG_REGISTER_CONFIRM = 202
 
+-- Ready-made /attach placements (generic attached-object demo). Weapon object
+-- model IDs from the SA-MP/open.mp weapon table; bone 1 = spine (back).
+-- Offsets/rotations are tuned so the weapon rests across the back.
+local ATTACH_PRESETS = {
+    sniper = { model = 358, bone = 1, ox = 0.05, oy = -0.15, oz = 0.05, rx = 0.0, ry = 95.0, rz = 0.0 },
+    ak47   = { model = 355, bone = 1, ox = 0.05, oy = -0.12, oz = 0.02, rx = 0.0, ry = 95.0, rz = 0.0 },
+    m4     = { model = 356, bone = 1, ox = 0.05, oy = -0.12, oz = 0.02, rx = 0.0, ry = 95.0, rz = 0.0 },
+    deagle = { model = 348, bone = 1, ox = 0.05, oy = -0.08, oz = 0.02, rx = 0.0, ry = 95.0, rz = 0.0 },
+}
+
 local MAX_LOGIN_FAILS = 5
 local LOGIN_RESET_AFTER = 180
 
@@ -393,11 +403,30 @@ function onPlayerCommand(id, command, params)
 
     -- /attach and /detach are generic attached-object demos (not a game
     -- feature): any model can be pinned to any SA-MP bone. Slot index 0 is
-    -- used so it is easy to detach. Try: /attach 1609 2  (a turtle on the head)
+    -- used so it is easy to detach.
+    -- With two numbers it attaches raw: /attach <modelid> <bone>
+    -- With a preset name it uses a ready-made placement, e.g. /attach sniper
+    -- (attaches the sniper rifle object 358 across the back / spine bone).
     if command == "attach" then
+        local preset = params:match("^(%a+)$")
+        if preset then
+            local p = ATTACH_PRESETS[preset:lower()]
+            if not p then
+                sa.SendClientMessage(id, 0xFF4444FF, "Unknown preset. Try: sniper, ak47, m4, deagle")
+                return true
+            end
+            local ok, err = pcall(sa.SetPlayerAttachedObject, id, 0, p.model, p.bone,
+                p.ox, p.oy, p.oz, p.rx, p.ry, p.rz, 1.0, 1.0, 1.0)
+            if ok then
+                sa.SendClientMessage(id, 0x00FF00FF, "Attached '" .. preset:lower() .. "' to slot 0.")
+            else
+                sa.SendClientMessage(id, 0xFF4444FF, "Attach failed: " .. tostring(err))
+            end
+            return true
+        end
         local model, bone = params:match("^(%d+)%s+(%d+)$")
         if not model then
-            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /attach <modelid> <bone> (e.g. /attach 1609 2)")
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /attach <modelid> <bone>  OR  /attach <preset>  (e.g. /attach sniper)")
             return true
         end
         local ok, err = pcall(sa.SetPlayerAttachedObject, id, 0, tonumber(model), tonumber(bone))
