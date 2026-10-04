@@ -345,7 +345,7 @@ end
 function onPlayerCommand(id, command, params)
     -- --- General / Help Commands ---
     if command == "help" or command == "helpers" then
-        sa.SendClientMessage(id, 0xFFFFFFFF, "Commands: /veh /giveweapon /heal /setadmin /kick /ban /say")
+        sa.SendClientMessage(id, 0xFFFFFFFF, "Commands: /veh /giveweapon /heal /setadmin /attach /detach /kick /ban /say")
         return true
     end
 
@@ -388,6 +388,35 @@ function onPlayerCommand(id, command, params)
     if command == "setadmin" then
         sa.SetPlayerAdmin(id, true)
         sa.SendClientMessage(id, 0x00FF00FF, "Admin enabled.")
+        return true
+    end
+
+    -- /attach and /detach are generic attached-object demos (not a game
+    -- feature): any model can be pinned to any SA-MP bone. Slot index 0 is
+    -- used so it is easy to detach. Try: /attach 1609 2  (a turtle on the head)
+    if command == "attach" then
+        local model, bone = params:match("^(%d+)%s+(%d+)$")
+        if not model then
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /attach <modelid> <bone> (e.g. /attach 1609 2)")
+            return true
+        end
+        local ok, err = pcall(sa.SetPlayerAttachedObject, id, 0, tonumber(model), tonumber(bone))
+        if ok then
+            sa.SendClientMessage(id, 0x00FF00FF, "Object attached to slot 0.")
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Attach failed: " .. tostring(err))
+        end
+        return true
+    end
+
+    if command == "detach" then
+        local index = tonumber(params:match("^(%d*)$") or "0")
+        local ok, err = pcall(sa.RemovePlayerAttachedObject, id, index)
+        if ok then
+            sa.SendClientMessage(id, 0x00FF00FF, "Object removed from slot " .. index .. ".")
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Detach failed: " .. tostring(err))
+        end
         return true
     end
 

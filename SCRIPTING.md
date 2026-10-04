@@ -299,6 +299,55 @@ Object pool supports up to 2,000 global models (IDs 0–1999).
 - `sa.MoveObject(objectID, toX, toY, toZ, speed, rotX, rotY, rotZ)`: Smoothly interpolates an object to a new location.
 - `sa.StopObject(objectID)`: Halts ongoing object movement.
 
+### Attached Objects (RPC 113)
+
+An attached object is a model pinned to one of a player's bones (hat on the
+head, weapon on the back, ...). Each player has **10 slots** (index 0–9, since
+SA-MP 0.3d). Attach and remove share a single RPC distinguished by a `create`
+flag: a create packet carries the full attachment data, a remove packet carries
+only the opening fields (shorter payload).
+
+- `sa.SetPlayerAttachedObject(playerID, index, modelID, bone, [offsetX, offsetY, offsetZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ, color1, color2])`: Attaches a model to a bone (RPC 113, create=true). Defaults: offsets/rotations `0.0`, scale `1.0`, colors `0` (native model colors). Returns `ok` (boolean).
+- `sa.RemovePlayerAttachedObject(playerID, index)`: Clears a slot (RPC 113, create=false). Returns `ok` (boolean).
+- `sa.IsPlayerAttachedObjectSlotUsed(playerID, index)`: Reads core bookkeeping for whether a slot is occupied. Returns `used` (boolean).
+
+An `index` outside **0..9** raises a Lua error instead of sending a packet the
+client would misinterpret. The packet is streamed to nearby players (including
+the target). `sa.MAX_ATTACHED_OBJECT_SLOTS` = `10`.
+
+#### Bone IDs (official SA-MP set: only 1..18)
+
+| ID | Bone | Lua constant |
+|---|---|---|
+| 1 | Spine | `sa.BONE_SPINE` |
+| 2 | Head | `sa.BONE_HEAD` |
+| 3 | Left upper arm | `sa.BONE_LEFT_UPPER_ARM` |
+| 4 | Right upper arm | `sa.BONE_RIGHT_UPPER_ARM` |
+| 5 | Left hand | `sa.BONE_LEFT_HAND` |
+| 6 | Right hand | `sa.BONE_RIGHT_HAND` |
+| 7 | Left thigh | `sa.BONE_LEFT_THIGH` |
+| 8 | Right thigh | `sa.BONE_RIGHT_THIGH` |
+| 9 | Left foot | `sa.BONE_LEFT_FOOT` |
+| 10 | Right foot | `sa.BONE_RIGHT_FOOT` |
+| 11 | Right calf | `sa.BONE_RIGHT_CALF` |
+| 12 | Left calf | `sa.BONE_LEFT_CALF` |
+| 13 | Left forearm | `sa.BONE_LEFT_FOREARM` |
+| 14 | Right forearm | `sa.BONE_RIGHT_FOREARM` |
+| 15 | Left clavicle (shoulder) | `sa.BONE_LEFT_CLAVICLE` |
+| 16 | Right clavicle (shoulder) | `sa.BONE_RIGHT_CLAVICLE` |
+| 17 | Neck | `sa.BONE_NECK` |
+| 18 | Jaw | `sa.BONE_JAW` |
+
+> Source: SA-MP Wiki "Bone IDs" and open.mp docs `scripting/resources/boneid`
+> (identical). SA-MP defines bones only 1..18.
+
+```lua
+sa.SetPlayerAttachedObject(playerid, 0, 1609, sa.BONE_HEAD) -- hat on head
+if sa.IsPlayerAttachedObjectSlotUsed(playerid, 0) then
+    sa.RemovePlayerAttachedObject(playerid, 0)
+end
+```
+
 ---
 
 ## World: Actors (NPCs)
