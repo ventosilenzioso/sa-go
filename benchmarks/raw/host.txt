@@ -1,0 +1,6 @@
+=== host ===
+date: Sun Oct  4 02:47:33 AM UTC 2026
+cpu: model name	: AMD EPYC 9575F 64-Core Processor
+cores: 4
+mem: 7887 MB total, 4493 MB available
+Linux ubuntu 7.0.0-34-generic #34-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep  2 14:29:37 UTC 2026 x86_64 GNU/Linux

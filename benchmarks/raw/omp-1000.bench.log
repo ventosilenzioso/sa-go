@@ -1,0 +1,5 @@
+stage 1000 bots: 1000 ok, 0 failed (of 1000)
+  time-to-spawn ms: n=1000 min=93.71 p50=596.99 p95=795.11 p99=813.22 max=832.25 mean=565.51
+  chat RTT ms: n=5000 min=7.49 p50=138.68 p95=208.71 p99=217.10 max=239.80 mean=126.90
+  echo throughput: 510.1 msg/s
+RAMP COMPLETE: all stages passed without breaking

@@ -1,0 +1,127 @@
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:47 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:48 AM     0    188159    9.00    3.00    0.00    1.00   12.00     1  omp-server
+
+02:47:47 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:48 AM     0    188159   1114.00      0.00  131764   94740   1.17  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159    9.00    3.00    0.00    1.00   12.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159   1114.00      0.00  131764   94740   1.17  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:48 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:49 AM     0    188159   12.00    4.00    0.00    1.00   16.00     0  omp-server
+
+02:47:48 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:49 AM     0    188159    827.00      0.00  139496   98068   1.21  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   12.00    4.00    0.00    1.00   16.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    827.00      0.00  139496   98068   1.21  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:49 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:50 AM     0    188159   19.00    4.00    0.00    1.00   23.00     0  omp-server
+
+02:47:49 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:50 AM     0    188159    827.00      0.00  144668  101524   1.26  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   19.00    4.00    0.00    1.00   23.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    827.00      0.00  144668  101524   1.26  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:50 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:51 AM     0    188159   17.00   10.00    0.00    0.00   27.00     0  omp-server
+
+02:47:50 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:51 AM     0    188159    749.00      0.00  150600  104340   1.29  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   17.00   10.00    0.00    0.00   27.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    749.00      0.00  150600  104340   1.29  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:51 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:52 AM     0    188159   22.00    6.00    0.00    1.00   28.00     3  omp-server
+
+02:47:51 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:52 AM     0    188159    654.00      0.00  155460  107028   1.33  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   22.00    6.00    0.00    1.00   28.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    654.00      0.00  155460  107028   1.33  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:52 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:53 AM     0    188159   24.00    8.00    0.00    1.00   32.00     0  omp-server
+
+02:47:52 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:53 AM     0    188159    663.00      0.00  160524  109588   1.36  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   24.00    8.00    0.00    1.00   32.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    663.00      0.00  160524  109588   1.36  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:53 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:54 AM     0    188159   24.00   11.00    0.00    1.00   35.00     2  omp-server
+
+02:47:53 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:54 AM     0    188159    648.00      0.00  164592  112276   1.39  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   24.00   11.00    0.00    1.00   35.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    648.00      0.00  164592  112276   1.39  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:54 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:55 AM     0    188159   29.00    9.00    0.00    2.00   38.00     2  omp-server
+
+02:47:54 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:55 AM     0    188159    528.00      0.00  169376  114324   1.42  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   29.00    9.00    0.00    2.00   38.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    528.00      0.00  169376  114324   1.42  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
+
+02:47:55 AM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:47:56 AM     0    188159   28.00    9.00    0.00    1.00   37.00     0  omp-server
+
+02:47:55 AM   UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+02:47:56 AM     0    188159    285.00      0.00  170900  115604   1.43  omp-server
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0    188159   28.00    9.00    0.00    1.00   37.00     -  omp-server
+
+Average:      UID       PID  minflt/s  majflt/s     VSZ     RSS   %MEM  Command
+Average:        0    188159    285.00      0.00  170900  115604   1.43  omp-server
+---
+Linux 7.0.0-34-generic (ubuntu) 	10/04/2026 	_x86_64_	(4 CPU)
