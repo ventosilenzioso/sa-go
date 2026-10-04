@@ -366,8 +366,43 @@ end, playerName)
 ## Logging & Utility
 
 - `sa.Log(text, ...)`: Outputs an informational message to the server console and log file.
-- `sa.SendClientMessage(playerID, colorRGBA, message)`: Sends colored chat text to a player.
-- `sa.SendClientMessageToAll(colorRGBA, message)`: Broadcasts colored chat text to all players.
+- `sa.SendClientMessage(playerID, colorRGBA, message)`: Sends colored text to a player (RPC 93).
+- `sa.SendClientMessageToAll(colorRGBA, message)`: Broadcasts colored text to all players.
+
+## Messaging, GameText, Death Feed & Chat Bubbles
+
+### `sa.SendPlayerMessageToPlayer(playerID, senderID, text)`
+Sends a chat-style line (RPC 101) to one player as if spoken by `senderID`.
+- **Returns:** `ok` (boolean)
+
+### `sa.SendPlayerMessageToAll(senderID, text)`
+Broadcasts a chat-style line from `senderID` to every player.
+
+### `sa.GameTextForPlayer(playerID, style, timeMS, text)`
+Shows styled on-screen text (RPC 73) to one player for `timeMS` milliseconds.
+- **Parameters:** `style` (see GameText styles), `timeMS` (integer)
+- **Returns:** `ok` (boolean)
+
+### `sa.GameTextForAll(style, timeMS, text)`
+Shows styled on-screen text to every player.
+
+### `sa.SendDeathMessage(killerID, killeeID, reason)`
+Broadcasts a kill-feed entry (RPC 55) to all players. `reason` is a weapon id; pass `-1` for killer when there is none (mapped to the 0xFFFF sentinel).
+- **Returns:** `ok` (boolean)
+
+### `sa.SendDeathMessageToPlayer(playerID, killerID, killeeID, reason)`
+Sends a kill-feed entry to a single player.
+- **Returns:** `ok` (boolean)
+
+### `sa.SetPlayerChatBubble(playerID, text, colorRGBA, drawDistance, expireMS)`
+Shows a 3D chat bubble (RPC 59) above a player for `expireMS` milliseconds, streamed to players within `drawDistance` units. A `drawDistance` of 0 defaults to 100.
+- **Returns:** `ok` (boolean)
+
+#### GameText Styles
+- `sa.GAMETEXT_STYLE_CENTER` = `3`
+- `sa.GAMETEXT_STYLE_LIGHT` = `4`
+- `sa.GAMETEXT_STYLE_MIDDLE` = `5`
+- `sa.GAMETEXT_STYLE_INFO` = `6`
 
 ---
 
