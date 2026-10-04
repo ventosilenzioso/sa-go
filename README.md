@@ -22,28 +22,39 @@ SA:GO's performance advantages are backed by rigorous, real-world head-to-head s
 | | open.mp | 50 / 50 (100%) | 196.4 ms | 18.7 ms | 323 msg/s | ~39× slower spawn |
 | **100 Bots**<br>*(Extreme Stress)* | **SA:GO** | **100 / 100 (100%)** | **5.0 ms** | **0.06 ms** | **552 msg/s** | **Stable** |
 | | open.mp | 100 / 100 (100%) | 228.6 ms | 21.8 ms | 379 msg/s | ~46× slower spawn |
-| **1000 Bots**<br>*(Thousand-Player Scale)* | **SA:GO** | **1000 / 1000 (100%)** | **5.0 ms** | **0.06 ms** | **—** | **Stable** (server 9% CPU) |
-| | open.mp | 1000 / 1000 (100%) | 135.9 ms | 8.3 ms | — | Server ~10-25% CPU, ~90MB RAM |
 | **50 Bots**<br>*(Flaky WAN: 5% Loss + Jitter)* | **SA:GO** | **50 / 50 (100%)** | **269.0 ms** | **63.2 ms** | **103 msg/s** | **Stable** |
 | | open.mp | 41 / 50 (82%) | 320.8 ms | 74.1 ms | 20 msg/s | 9 bots dropped |
 
-### Deep Resource Monitoring at 1000 Players
+### The Thousand-Player Showcase
 
-Measured with per-second process sampling (`pidstat`, `/proc`, `vmstat`, `iostat`) while 1000 bots were connected and exchanging chat:
+The headline event: **1000 concurrent players** joined a single SA:GO server, exchanged chat, and stayed connected — with a **100% success rate** and not a single dropped player. Both servers were driven by the same harness on the same host, with identical staggering.
 
-| Resource | SA:GO (1000 bots) | open.mp (1000 bots) | Advantage |
+| Metric | SA:GO | open.mp 1.5.8.3079 | SA:GO Advantage |
 |---|---|---|---|
-| **Server CPU** | **~8–10%** (mean ~9%) | ~12–25% | ~2–3× lighter |
-| **Resident Memory (RSS)** | **~20 MB steady** (idle ~11 MB) | ~90–93 MB | **~4.5× less RAM** |
+| **Players connected** | **1000 / 1000 (100%)** | 1000 / 1000 (100%) | Tied at full capacity |
+| **Spawn p50** | **5.0 ms** | 135.9 ms | **27× faster** |
+| **Spawn p95** | **5.8 ms** | 139.2 ms | ~24× faster |
+| **Spawn p99** | **6.5 ms** | 140.0 ms | ~22× faster |
+| **Spawn max** | **10.0 ms** | 141.1 ms | ~14× faster |
+| **Chat RTT p50** | **0.06 ms** | 8.3 ms | **138× lower** |
+| **Chat RTT p95** | **0.16 ms** | 13.4 ms | ~84× lower |
+| **Chat RTT p99** | **0.21 ms** | 13.8 ms | ~66× lower |
+| **Chat RTT max** | **0.84 ms** | 19.0 ms | ~23× lower |
+| **Server CPU** | **~8–10%** | ~12–25% | ~2–3× lighter |
+| **Resident memory (RSS)** | **~20 MB** (idle ~11 MB) | ~90–93 MB | **~4.5× less RAM** |
 | **Threads** | **10** | 2 (plus internal pools) | — |
-| **File Descriptors** | **6–7 (one UDP socket)** | 5 | Single-socket design |
-| **Major page faults** | **0** | 0 | Zero disk paging |
+| **File descriptors** | **6–7 (one UDP socket)** | 5 | Single-socket design |
+| **Major page faults** | **0** | 0 | No disk paging |
 | **Involuntary context switches** | **0** | — | No scheduler contention |
 | **Disk utilization** | **0.03%** | — | Effectively no disk I/O |
 | **Goroutines (steady state)** | **5** | — | Tiny runtime footprint |
 
+**Five-minute soak at 1000 players:** resident memory stayed flat at **20–21 MB**, goroutines held at **5**, and the server logged **zero timeouts, zero rate-limit drops, and zero panics** from the first minute to the last. A thousand players cost SA:GO less than 10% of one CPU core and about 20 MB of RAM — a load any entry-level VPS can carry.
+
+Resource figures were captured with per-second process sampling (`pidstat`, `/proc`, `vmstat`, `iostat`). All runs are reproducible from the bundled benchmark tooling.
+
 #### Key Performance Takeaways
-- **~30–45× Faster World Entry:** SA:GO places players in the game world in a consistent 5 ms from 20 up to 1000 players, versus 135–320 ms on open.mp.
+- **27–46× Faster World Entry:** SA:GO places players in the game world in a consistent 5 ms from 20 up to 1000 players, versus 135–320 ms on open.mp.
 - **Over 100× Lower Communication Latency:** Sub-millisecond internal processing (0.05–0.06 ms median) delivers essentially instant player interaction and command response.
 - **4–5× Lower Memory Footprint:** A full 1000-player server holds steady at roughly 20 MB of RAM, leaving ample headroom on even the smallest VPS.
 - **Rock-Solid Packet Loss Tolerance:** Under simulated adverse wireless conditions (5% packet loss, packet reordering, 5–60 ms jitter), SA:GO retains 100% of connections with roughly 5× higher throughput, while open.mp drops players.
