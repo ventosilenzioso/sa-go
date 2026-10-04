@@ -401,6 +401,52 @@ function onPlayerCommand(id, command, params)
         return true
     end
 
+    -- --- Player-category demo commands (generic primitives) ---
+    -- These exist only to exercise representative player natives; swap them for
+    -- real rules in your own gamemode.
+    if command == "skin" then
+        local sk = tonumber(params:match("^(%d+)$") or "")
+        if sk then
+            sa.SetPlayerSkin(id, sk)
+            sa.SendClientMessage(id, 0x00FF00FF, "Skin changed.")
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /skin <id>")
+        end
+        return true
+    end
+
+    if command == "money" then
+        local amount = tonumber(params:match("^(-?%d+)$") or "")
+        if amount then
+            sa.GivePlayerMoney(id, amount)
+            sa.SendClientMessage(id, 0x00FF00FF, "Money changed by " .. amount .. ".")
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /money <amount> (negative to subtract)")
+        end
+        return true
+    end
+
+    if command == "anim" then
+        local lib, name = params:match("^(%S+)%s+(%S+)$")
+        if lib then
+            sa.ApplyPlayerAnimation(id, lib, name, 4.1, true, false, false, false, 0)
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /anim <lib> <name> (e.g. /anim ped WALK_drunk)")
+        end
+        return true
+    end
+
+    if command == "dance" then
+        sa.SetPlayerSpecialAction(id, sa.SPECIAL_ACTION_DANCE1)
+        return true
+    end
+
+    if command == "camera" or command == "widescreen" then
+        sa.TogglePlayerWidescreen(id, true)
+        sa.SendClientMessage(id, 0x00FF00FF, "Widescreen toggled.")
+        return true
+    end
+
     -- /attach and /detach are generic attached-object demos (not a game
     -- feature): any model can be pinned to any SA-MP bone. Slot index 0 is
     -- used so it is easy to detach.

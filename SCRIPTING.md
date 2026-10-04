@@ -231,6 +231,65 @@ sa.DisableInteriorEnterExits()
 
 ---
 
+## Player Primitives
+
+Generic natives covering the full SA-MP "Player" RPC set. The core only sends
+the packet and keeps minimal bookkeeping; your gamemode decides when and why.
+
+### Identity & appearance
+- `sa.SetPlayerName(playerID, name)`: Renames the player (RPC 11, broadcast).
+- `sa.SetPlayerColor(playerID, colorRGBA)`: Sets nametag color (RPC 72).
+- `sa.ShowPlayerNameTagForPlayer(playerID, showPlayerID, show)`: Toggles a target's nametag for a viewer (RPC 80).
+- `sa.SetPlayerSkin(playerID, skinID)`: Changes the skin (RPC 153).
+
+### Position & movement
+- `sa.SetPlayerPos(playerID, x, y, z)`: Teleports (RPC 12).
+- `sa.SetPlayerPosFindZ(playerID, x, y, z)`: Teleports, client finds ground Z (RPC 13).
+- `sa.SetPlayerFacingAngle(playerID, angle)`: Facing angle (RPC 19).
+- `sa.SetPlayerVelocity(playerID, x, y, z)`: Velocity (RPC 90).
+- `sa.TogglePlayerControllable(playerID, controllable)`: Locks/unlocks control (RPC 15).
+
+### Status & condition
+- `sa.SetPlayerSkillLevel(playerID, skillID, level)`: Weapon skill level (RPC 34).
+- `sa.SetPlayerDrunkLevel(playerID, level)`: Drunk level (RPC 35).
+- `sa.SetPlayerWantedLevel(playerID, level)`: Wanted stars (RPC 133).
+- `sa.SetPlayerFightingStyle(playerID, style)`: Fighting style (RPC 89).
+- `sa.SetPlayerSpecialAction(playerID, actionID)`: Special action (RPC 88).
+
+### Money
+- `sa.GivePlayerMoney(playerID, amount)`: Adds/subtracts money (RPC 18, amount may be negative).
+- `sa.ResetPlayerMoney(playerID)`: Resets money to 0 (RPC 20).
+
+### Animation
+- `sa.ApplyPlayerAnimation(playerID, animLib, animName, delta, loop, lockX, lockY, freeze, time)`: Plays an animation (RPC 86).
+- `sa.ClearPlayerAnimation(playerID)`: Stops the animation (RPC 87).
+
+### Per-player world & environment
+- `sa.SetPlayerTime(playerID, hour, minute)`: Personal time (RPC 29).
+- `sa.TogglePlayerClock(playerID, toggle)`: Shows the clock (RPC 30).
+- `sa.SetPlayerInterior(playerID, interiorID)`: Interior (RPC 156).
+- `sa.SetPlayerWorldBounds(playerID, maxX, minX, maxY, minY)`: World bounds (RPC 17).
+- `sa.TogglePlayerSpectating(playerID, toggle)`: Spectate mode (RPC 124).
+- `sa.PlayerSpectatePlayer(playerID, targetPlayerID, [mode])`: Spectate a player (RPC 126, default mode 1).
+- `sa.PlayerSpectateVehicle(playerID, vehicleID, [mode])`: Spectate a vehicle (RPC 127, default mode 1).
+- `sa.TogglePlayerWidescreen(playerID, enable)`: Widescreen (RPC 111).
+
+### Sound & messages
+- `sa.PlayerPlaySound(playerID, soundID, x, y, z)`: Plays a sound (RPC 16).
+- `sa.PlayCrimeReportForPlayer(playerID, suspectID, inVehicle, vehicleModel, vehicleColor, crime, x, y, z)`: Crime report (RPC 112).
+
+### Misc
+- `sa.ForceClassSelection(playerID)`: Forces class selection (RPC 74).
+- `sa.SetPlayerShopName(playerID, name)`: Shop name (RPC 33, fixed 32-byte field; empty unloads).
+- `sa.CreateExplosionForPlayer(playerID, x, y, z, type, radius)`: Explosion for one player (RPC 79).
+- `sa.RemoveBuildingForPlayer(playerID, modelID, x, y, z, radius)`: Removes a building for one player (RPC 43).
+- `sa.SetPlayerScore(playerID, score)`: Sets score and broadcasts the score/ping table (RPC 155). Ping is taken from the connection state.
+
+Constants: `WEAPONSKILL_*` (0..10), `FIGHT_STYLE_*`, `SPECIAL_ACTION_*`,
+`SPECTATE_MODE_NORMAL/FIXED/SIDE` (1/2/3).
+
+---
+
 ## User Interface: TextDraws
 
 TextDraws operate on the canonical 640.0 x 480.0 virtual canvas.
