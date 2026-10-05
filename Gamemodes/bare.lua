@@ -77,6 +77,20 @@ local function resetBaseline(id)
     exitGrace[id] = nil
 end
 
+-- Generic world mapping demo (objects, moving object, pickup)
+-- These demonstrate generic engine primitives, not a specific gamemode feature.
+-- 1. Static object: wooden crate near spawn
+local staticCrate = sa.CreateObject(1225, SPAWN.x + 3.0, SPAWN.y, SPAWN.z, 0.0, 0.0, 0.0, 200.0)
+
+-- 2. Moving object: barrier that moves forward to demonstrate sa.MoveObject animation
+local movingGate = sa.CreateObject(980, SPAWN.x + 10.0, SPAWN.y, SPAWN.z, 0.0, 0.0, 0.0, 200.0)
+if movingGate then
+    sa.MoveObject(movingGate, SPAWN.x + 10.0, SPAWN.y + 10.0, SPAWN.z, 2.0, 0.0, 0.0, 0.0)
+end
+
+-- 3. Simple pickup: health pickup near spawn (type 2: respawns after pickup)
+local healthPickup = sa.CreatePickup(1240, 2, SPAWN.x + 2.0, SPAWN.y + 2.0, SPAWN.z)
+
 local function recordStrike(id, now)
     local s = strikes[id]
     if not s then
@@ -280,7 +294,7 @@ function onPlayerSpawn(id)
     sa.TextDrawColor(2, 0x00FF00FF)
     sa.TextDrawShowForPlayer(id, 2)
 
-    -- Spawn map icon
+    -- 4. Spawn map icon (generic 2D radar blip, distinct from 3D world labels or gang zones)
     sa.SetPlayerMapIcon(id, 10, SPAWN.x, SPAWN.y, SPAWN.z, 0, 0x00FF00FF, 1)
 end
 
@@ -348,6 +362,19 @@ end
 
 function onPlayerText(id, text)
     return false
+end
+
+-- Generic pickup event: core delivers raw pickup id, gamemode decides effect.
+function onPlayerPickUpPickup(id, pickupID)
+    if pickupID == healthPickup then
+        sa.SetPlayerHealth(id, 100.0)
+        sa.SendClientMessage(id, 0x00FF00FF, "Health pickup collected.")
+    end
+end
+
+-- Generic object selection event: core delivers raw facts from client object editing.
+function onPlayerSelectObject(id, objectType, objectID, modelID, x, y, z)
+    sa.SendClientMessage(id, 0xFFFFFFFF, string.format("Selected object %d (model %d)", objectID, modelID))
 end
 
 -- Commands

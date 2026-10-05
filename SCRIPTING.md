@@ -354,9 +354,19 @@ Object pool supports up to 2,000 global models (IDs 0–1999).
 - `sa.CreateObject(model, x, y, z, rx, ry, rz, drawDistance)`: Spawns a world object.
 - `sa.DestroyObject(objectID)`: Deletes an object.
 - `sa.SetObjectPos(objectID, x, y, z)`: Teleports an object.
-- `sa.SetObjectRotation(objectID, rx, ry, rz)`: Rotates an object.
+- `sa.SetObjectRot(objectID, rx, ry, rz)` / `sa.SetObjectRotation(objectID, rx, ry, rz)`: Sets object Euler rotation.
 - `sa.MoveObject(objectID, toX, toY, toZ, speed, rotX, rotY, rotZ)`: Smoothly interpolates an object to a new location.
 - `sa.StopObject(objectID)`: Halts ongoing object movement.
+- `sa.AttachObjectToPlayer(objectID, playerID, offsetX, offsetY, offsetZ, rotX, rotY, rotZ)`: Attaches a world object to follow a player (RPC 75).
+- `sa.SetObjectMaterial(objectID, materialIndex, modelID, txdName, textureName, colorRGBA)`: Replaces material texture on an object slot (RPC 84 Material variant, index 0–15).
+- `sa.SetObjectMaterialText(objectID, materialIndex, text, materialSize, fontName, fontSize, bold, fontColorRGBA, backgroundColorRGBA, alignment)`: Renders text as a material texture onto an object slot (RPC 84 MaterialText variant). Defaults: Arial font, size 24, white text.
+
+### Pickups (RPC 95, 63)
+
+Pickups are world items floating at coordinates (weapons, health, armor, info icons). Pool size is 4,096 pickups (IDs 0–4095).
+
+- `sa.CreatePickup(modelID, type, x, y, z)`: Spawns a pickup in the world (RPC 95). Returns `pickupID` or `nil`.
+- `sa.DestroyPickup(pickupID)`: Destroys a pickup (RPC 63). Returns `ok` (boolean).
 
 ### Attached Objects (RPC 113)
 
@@ -446,7 +456,9 @@ Actors are ambient non-player peds that do not consume player slots (IDs 0–999
 
 ---
 
-## World: Map Icons
+## World: Map Icons (2D Radar Blips)
+
+Map icons are strictly 2D radar blips sent per-player (IDs 0–99). **Note:** Map Icons are completely distinct from Gang Zones (colored 2D radar territories) and 3D Text Labels (3D world labels).
 
 - `sa.SetPlayerMapIcon(playerID, iconID, x, y, z, markerType, color, style)`: Creates a radar map icon (0–99).
 - `sa.RemovePlayerMapIcon(playerID, iconID)`: Removes a radar map icon.
@@ -579,6 +591,8 @@ To handle game events, simply define these functions in your Lua gamemode.
 - `onPlayerLeaveCheckpoint(playerID)`: Player exits standard checkpoint.
 - `onPlayerEnterRaceCheckpoint(playerID)`: Player enters race checkpoint radius.
 - `onPlayerLeaveRaceCheckpoint(playerID)`: Player exits race checkpoint.
+- `onPlayerPickUpPickup(playerID, pickupID)`: Player walks over a pickup (RPC 131). The gamemode chooses any effect.
+- `onPlayerSelectObject(playerID, objectType, objectID, modelID, x, y, z)`: Player selects an object during editing (RPC 27).
 - `onActorDamage(actorID, playerID, amount, weaponID, bodyPart)`: Player damages an ambient actor NPC.
 
 ---
