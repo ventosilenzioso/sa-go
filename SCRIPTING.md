@@ -619,3 +619,66 @@ To handle game events, simply define these functions in your Lua gamemode.
 - `sa.CP_TYPE_NOTHING` = `2`
 - `sa.CP_TYPE_AIR_NORMAL` = `3`
 - `sa.CP_TYPE_AIR_FINISH` = `4`
+
+---
+
+## SA-MP Compatibility — New Native Groups
+
+Coverage of official SA-MP 0.3.7 natives is now complete for every category
+except the legacy `Menu` system and outbound `HTTP` (both backlog).
+
+### Timers
+- `sa.SetTimer(name, intervalMS, repeating)`
+- `sa.SetTimerEx(name, intervalMS, repeating, format, ...)`
+- `sa.KillTimer(id)`
+
+### Player getters (Category A)
+`GetPlayerHealth`, `GetPlayerArmour`, `GetPlayerSkin`, `GetPlayerTeam`,
+`GetPlayerScore`, `GetPlayerMoney`, `GetPlayerColor`, `GetPlayerFacingAngle`,
+`GetPlayerState`, `GetPlayerInterior`, `GetPlayerVirtualWorld`, `GetPlayerPing`,
+`GetPlayerIp`, `GetPlayerVersion`, `GetPlayerWeapon`, `GetPlayerAmmo`,
+`GetPlayerKeys`, `GetPlayerVelocity`, `GetPlayerTime`, `GetPlayerVehicleID`,
+`GetPlayerVehicleSeat`, `GetPlayerCameraPos/FrontVector/Mode/Zoom`,
+`GetPlayerCameraTarget{Player,Actor,Vehicle,Object}`, `GetPlayerCustomSkin`.
+
+### Math / distance
+`sa.VectorSize`, `sa.IsPlayerInRangeOfPoint`, `sa.GetPlayerDistanceFromPoint`,
+`sa.GetDistanceBetweenPlayers`, `sa.GetVehicleDistanceFromPoint`.
+
+### SVars / PVars
+`sa.SetSVarInt/String/Float`, `sa.GetSVarInt/String/Float`, `sa.DeleteSVar`,
+`sa.GetSVarType`, `sa.GetSVarsUpperIndex`, `sa.GetSVarNameAtIndex`; same 10 for
+`PVar` (per-player).
+
+### Vehicle
+`SetVehiclePos`, `SetVehicleZAngle`, `SetVehicleVelocity`,
+`SetVehicleAngularVelocity`, `AttachTrailerToVehicle`, `DetachTrailerFromVehicle`,
+`SetVehicleParamsEx`, `SetVehicleParamsForPlayer`, `SetVehicleParamsCarDoors`,
+`SetVehicleParamsCarWindows`, `SetVehicleNumberPlate`, `LinkVehicleToInterior`,
+`AddVehicleComponent`, `RemoveVehicleComponent`, `ChangeVehicleColor`,
+`ChangeVehiclePaintjob`, `RepairVehicle`, `SetVehicleToRespawn`,
+`PutPlayerInVehicle`.
+
+### Object & PlayerObject
+Global: `AttachObjectToVehicle`, `AttachObjectToObject`, `EditObject`,
+`SelectObject`, `CancelEdit`, `SetObjectNoCameraCol`.
+Per-player: `CreatePlayerObject`, `DestroyPlayerObject`, `MovePlayerObject`,
+`StopPlayerObject`, `SetPlayerObjectPos/Rot`, `GetPlayerObjectPos/Rot/Model`,
+`IsValidPlayerObject`, `IsPlayerObjectMoving`, `AttachPlayerObjectToVehicle`,
+`AttachPlayerObjectToPlayer`, `SetPlayerObjectMaterial/Text`.
+
+### 3D Text Labels
+Global: `Update3DTextLabelText`, `Attach3DTextLabelToPlayer/Vehicle`.
+Per-player: `CreatePlayer3DTextLabel`, `DeletePlayer3DTextLabel`,
+`UpdatePlayer3DTextLabelText`.
+
+### Server / Admin / Misc
+`SetGameModeText`, `SetTeamCount`, `AddPlayerClass[Ex]`, `ShowNameTags`,
+`ShowPlayerMarkers`, `GameModeExit`, `SetWorldTime`, `SetWeather`, `SetGravity`,
+`CreateExplosion`, `SendRconCommand`, `BlockIpAddress`, `UnBlockIpAddress`,
+`CallLocalFunction`, `CallRemoteFunction`, `GetServerVarAs*`, `ConnectNPC`,
+`AddCharModel`, `AddSimpleModel[Timed]`, and the global InitGame toggles.
+
+### New events
+- `onPlayerEditObject(playerID, playerObject, objectID, response, offX, offY, offZ, rotX, rotY, rotZ)`
+- `onPlayerCancelObjectEdit(playerID)`
