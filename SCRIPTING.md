@@ -1,6 +1,6 @@
 # SA:GO Scripting API Reference
 
-This document provides a comprehensive reference for the Lua scripting environment in SA:GO. All native functions are exposed under the global `sa.*` namespace (with legacy compatibility aliases `gosamp.*` and `ffps.*`).
+This document provides a comprehensive reference for the native API behind **Knight (.sa)**, the only gamemode language in SA:GO. Knight compiles to Lua which calls these natives under the global `sa.*` namespace. The Lua files in this package are an internal implementation target, not an authoring format.
 
 ---
 
