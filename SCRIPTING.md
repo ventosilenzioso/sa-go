@@ -1,6 +1,6 @@
 # SA:GO Scripting API Reference
 
-This document provides a comprehensive reference for the native API behind **Knight (.sa)**, the only gamemode language in SA:GO. Knight compiles to Lua which calls these natives under the global `sa.*` namespace. The Lua files in this package are an internal implementation target, not an authoring format.
+This document provides a comprehensive reference for the native API behind **Knight (.sa)**, the only gamemode language in SA:GO. Knight compiles to an AST that the native Go runtime executes, calling these natives under the `sa.*` namespace. There is no Lua VM or authoring layer.
 
 ---
 
@@ -778,9 +778,9 @@ State constants: `PLAYER_STATE_NONE` (0), `_ONFOOT` (1), `_DRIVER` (2),
 
 ## Knight Language (.sa) — primary scripting language
 
-Knight is a statically-typed language that compiles to Lua calling the same
-`sa.*` natives. The server loads `.sa` gamemodes natively (transpiled at load
-time). Lua `.lua` gamemodes remain supported.
+Knight is a statically-typed language compiled to an AST and executed by the
+native Go runtime, calling the same `sa.*` natives. The server loads `.sa`
+gamemodes natively. Lua `.lua` gamemodes are not supported.
 
 ### File structure
 A gamemode can be a **single self-contained `.sa` file** — no include is
@@ -845,5 +845,5 @@ Escape literal braces with `\{` and `\}`.
 ```
 ./Bin/sa-go-server -cfg server.cfg -gamemode Gamemodes/bare.sa
 ```
-The server compiles `.sa` automatically; a standalone `knight` compiler is also
-available (`go run ./cmd/knight -o out.lua Gamemodes/bare.sa`).
+The server compiles `.sa` automatically; a standalone validator is also
+available (`go run ./cmd/knight -check Gamemodes/bare.sa`).

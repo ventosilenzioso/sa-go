@@ -74,7 +74,7 @@ Taken from `raw/host.txt`:
 
 ## 4. Fairness notes (read this before quoting a ratio)
 
-1. **Both servers run a gamemode.** SA:GO runs `bench.lua` (this folder);
+1. **Both servers run a gamemode.** SA:GO runs `bench.sa` (this folder);
    open.mp runs its stock `gungame.amx`. Earlier ad-hoc runs compared *bare*
    SA:GO against gungame, which unfairly favoured SA:GO; the canonical script
    now loads a gamemode for both.
@@ -124,7 +124,7 @@ Or manually, against a server you started yourself:
 
 ```bash
 # terminal 1: server (SA:GO)
-bin/gosamp-server -cfg server.cfg -gamemode benchmarks/bench.lua
+bin/gosamp-server -cfg server.cfg -gamemode benchmarks/bench.sa
 
 # terminal 2: harness
 benchmarks/harness/gosamp-bench -server 127.0.0.1:7777 -clients 1000 -chat-per-client 5 -stagger 8ms
@@ -142,7 +142,7 @@ checkable reasons — not secret sauce:
    interpreted Pawn VM and routes player join/chat through its scripting
    scheduler. SA:GO's built-in chat relay and join path are native compiled
    code; the Lua gamemode is only invoked when it actually registers a handler.
-   The measured `bench.lua`/`gungame` handlers do almost nothing, so this
+   The measured `bench.sa`/`gungame` handlers do almost nothing, so this
    isolates engine overhead.
 2. **No fixed tick gate on relay.** SA:GO flushes reliability/ACKs and relays
    packets as they are processed; open.mp's networking is driven by its server

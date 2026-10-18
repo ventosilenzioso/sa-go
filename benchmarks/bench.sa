@@ -1,0 +1,12 @@
+// Benchmark gamemode: permissive, no login gate, minimal logic.
+// Its only purpose is to allow bots to join -> class -> spawn so SA:GO is
+// measured with a gamemode loaded (comparable to open.mp running gungame).
+// It deliberately does NOT echo chat (chat relay stays in the core) and does
+// no anticheat, so it matches open.mp's gungame in having spawn allowed.
+
+player::connect() { };
+player::disconnect() { };
+player::request_class(int classid) { return true; };
+player::request_spawn() { return true; };
+player::spawn() { };
+player::chat(string text) { return false; };
