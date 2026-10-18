@@ -1,0 +1,19 @@
+// Minimal single-file Knight gamemode — no includes required.
+system::config() {
+    server.name = "Minimal Knight";
+    server.max_players = 20;
+    server.port = 7777;
+}
+
+system::start() {
+    player.add_class(0, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+};
+
+player::connect() {
+    self.message("Welcome, {self.name}!");
+};
+
+player::command("/heal") {
+    self.set_health(100.0);
+    self.message("Healed.");
+};

@@ -86,7 +86,7 @@ SA:GO provides a comprehensive suite of built-in features, enabling developers t
 
 ## Out-of-the-Box Commands & Lua Scripting
 
-SA:GO comes ready to run with an official starter gamemode in **Knight** (`Gamemodes/bare.sa`), featuring essential gameplay and moderation commands. Knight is the only gamemode language; the server transpiles `.sa` to Lua and executes it on its internal engine:
+SA:GO comes ready to run with an official starter gamemode in **Knight** (`Gamemodes/bare.sa`), featuring essential gameplay and moderation commands. Knight is the only gamemode language; the server transpiles `.sa` to Lua and executes it on its internal engine. A gamemode can be **one self-contained `.sa` file** — no include is needed (native `sa.*` is built in):
 
 - `/veh <model> <color1> <color2>` — Spawns any vehicle model directly at the player's position.
 - `/giveweapon <id> <ammo>` — Equips a player with any valid weapon ID and ammunition count.

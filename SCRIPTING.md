@@ -783,9 +783,14 @@ Knight is a statically-typed language that compiles to Lua calling the same
 time). Lua `.lua` gamemodes remain supported.
 
 ### File structure
+A gamemode can be a **single self-contained `.sa` file** — no include is
+required. All `sa.*` natives and types are built in, like language
+primitives.
+
 ```
-#include <sago>          // standard header (all sa.* natives available)
-#include <shared.sa>     // custom file in the same directory
+// optional; equivalent to "the standard library is available" (already true)
+#include <sago>
+#include <shared.sa>     // optional custom file in the same directory
 ```
 
 ### Config and lifecycle
