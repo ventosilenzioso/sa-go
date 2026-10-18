@@ -91,6 +91,27 @@ end
 -- 3. Simple pickup: health pickup near spawn (type 2: respawns after pickup)
 local healthPickup = sa.CreatePickup(1240, 2, SPAWN.x + 2.0, SPAWN.y + 2.0, SPAWN.z)
 
+-- 4. Dynamic streamer demo (generic): an object that only exists for players
+-- within 150 units, and a rectangular area that fires enter/leave events.
+-- These are engine primitives, not a specific gamemode feature.
+local dynamicBarrel = sa.CreateDynamicObject(1225, SPAWN.x + 6.0, SPAWN.y + 6.0, SPAWN.z,
+    0.0, 0.0, 0.0, -1, -1, -1, 150.0)
+local demoArea = sa.CreateDynamicRectangle(
+    SPAWN.x - 20.0, SPAWN.y - 20.0, SPAWN.x + 20.0, SPAWN.y + 20.0, -1)
+
+-- Dynamic area enter/leave handlers (generic demo).
+function onPlayerEnterDynamicArea(id, areaid)
+    if areaid == demoArea then
+        sa.SendClientMessage(id, 0x00FF00FF, "Masuk zona demo.")
+    end
+end
+
+function onPlayerLeaveDynamicArea(id, areaid)
+    if areaid == demoArea then
+        sa.SendClientMessage(id, 0xFFAA00FF, "Keluar zona demo.")
+    end
+end
+
 local function recordStrike(id, now)
     local s = strikes[id]
     if not s then
@@ -422,6 +443,18 @@ function onPlayerCommand(id, command, params)
         return true
     end
 
+    -- Generic sscanf demo: /tp <x> <y> <z> parses three integers with sscanf.
+    if command == "tp" then
+        local fail, tx, ty, tz = sa.sscanf(params, "%d %d %d")
+        if fail == 0 and tx and ty and tz then
+            sa.SetPlayerPos(id, tx, ty, tz)
+            sa.SendClientMessage(id, 0x00FF00FF, "Teleported.")
+        else
+            sa.SendClientMessage(id, 0xFF4444FF, "Usage: /tp <x> <y> <z>")
+        end
+        return true
+    end
+
     if command == "setadmin" then
         sa.SetPlayerAdmin(id, true)
         sa.SendClientMessage(id, 0x00FF00FF, "Admin enabled.")
@@ -551,4 +584,34 @@ function onPlayerCommand(id, command, params)
     end
 
     return false
+end
+
+-- 5. MySQL async demo (generic, opt-in). Uncomment and set a DSN to use:
+--    local MYSQL = sa.mysql_open("user:pass@tcp(127.0.0.1:3306)/db")
+--    if MYSQL then
+--        local q = sa.mysql_format(MYSQL, "SELECT name FROM players WHERE id = %d", 1)
+--        sa.mysql_tquery(MYSQL, q, "onMysqlResult")
+--    end
+-- function onMysqlResult(resultIndex)
+--     local rows = sa.cache_get_row_count(resultIndex)
+--     if rows > 0 then
+--         local name = sa.cache_get_value_name(resultIndex, 0, "name")
+--         sa.Log("mysql: " .. name)
+--     end
+--     sa.cache_delete(resultIndex)
+-- end
+
+-- 6. Lifecycle hooks (generic). onGameModeInit fires once after load; use it
+-- for world setup. onPlayerStateChange/onPlayerKeyStateChange fire on real
+-- transitions only. onVehicleSpawn fires on CreateVehicle and respawn.
+function onGameModeInit()
+    sa.Log("SA:GO: onGameModeInit")
+end
+
+function onPlayerStateChange(id, newstate, oldstate)
+    -- e.g. detect entering a vehicle: newstate == sa.PLAYER_STATE_DRIVER
+end
+
+function onPlayerKeyStateChange(id, newkeys, oldkeys)
+    -- edge-triggered key handling (newkeys has bits that oldkeys lacked)
 end

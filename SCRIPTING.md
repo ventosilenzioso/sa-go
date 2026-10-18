@@ -682,3 +682,94 @@ Per-player: `CreatePlayer3DTextLabel`, `DeletePlayer3DTextLabel`,
 ### New events
 - `onPlayerEditObject(playerID, playerObject, objectID, response, offX, offY, offZ, rotX, rotY, rotZ)`
 - `onPlayerCancelObjectEdit(playerID)`
+
+---
+
+## Dynamic Streamer (Block 1)
+
+Per-player dynamic streaming. Items are sent only to players within their
+radius (default server `streamdistance` or a per-item radius), filtered by
+world, interior and optional owner. A ~250 ms periodic pass reconciles the
+visible set; force it immediately with `Streamer_Update`.
+
+Types: `sa.STREAMER_TYPE_OBJECT` (0), `_PICKUP` (1), `_CP` (2), `_RACE_CP` (3),
+`_MAP_ICON` (4), `_3D_TEXT_LABEL` (5), `_AREA` (6), `_ACTOR` (7).
+
+### Object
+`CreateDynamicObject(model, x, y, z, [rx, ry, rz, worldid, interiorid, playerid, streamdistance])`,
+`DestroyDynamicObject(id)`, `SetDynamicObjectPos/Rot`, `GetDynamicObjectPos/Rot`,
+`MoveDynamicObject`, `StopDynamicObject`, `EditDynamicObject(playerid, id)`,
+`SetDynamicObjectMaterial`, `SetDynamicObjectMaterialText`,
+`AttachDynamicObjectToVehicle`, `AttachDynamicObjectToPlayer`,
+`IsValidDynamicObject`.
+
+### Area
+`CreateDynamicRectangle(minx, miny, maxx, maxy, [worldid])`,
+`CreateDynamicCircle(x, y, radius, [worldid])`, `DestroyDynamicArea`,
+`IsValidDynamicArea`, `IsPlayerInDynamicArea(playerid, id)`.
+Events: `onPlayerEnterDynamicArea(playerid, areaid)`,
+`onPlayerLeaveDynamicArea(playerid, areaid)`.
+
+### Other primitives
+- Pickup: `CreateDynamicPickup`, `DestroyDynamicPickup`, `IsValidDynamicPickup`.
+- Checkpoint: `CreateDynamicCP`, `CreateDynamicRaceCP`, `DestroyDynamicCP`, `DestroyDynamicRaceCP`, `IsPlayerInDynamicCP`, `IsPlayerInDynamicRaceCP`.
+- Actor: `CreateDynamicActor`, `DestroyDynamicActor`, `SetDynamicActorPos`, `SetDynamicActorFacingAngle`, `ApplyDynamicActorAnimation`, `ClearDynamicActorAnimations`, `IsValidDynamicActor`.
+- Map icon: `CreateDynamicMapIcon`, `DestroyDynamicMapIcon`, `IsValidDynamicMapIcon`.
+- 3D text: `CreateDynamic3DTextLabel`, `DestroyDynamic3DTextLabel`, `UpdateDynamic3DTextLabelText`, `IsValidDynamic3DTextLabel`.
+
+### Global controls
+`Streamer_Update`, `Streamer_UpdateEx`, `Streamer_SetVisibleItems`,
+`Streamer_SetRadiusMultiplier`, `Streamer_MaxItems`, `Streamer_SetIntData`,
+`Streamer_SetArrayData`, `Streamer_GetArrayData`, `Streamer_ToggleIdleUpdate`,
+`Streamer_CountItems`, `Streamer_DestroyAllVisibleItems`.
+
+---
+
+## MySQL Async & Cache (Block 2)
+
+Driver MySQL available alongside SQLite. Async queries run on a worker
+goroutine; the named Lua callback runs on the main tick loop.
+
+- `mysql_open(dsn)` → `handle, err`; `mysql_close(handle)`.
+- `mysql_tquery(handle, query, callback_name, format_spec, ...)` and `mysql_pquery(...)`.
+- `mysql_format(handle, format, ...)` → string (`%s` escaped+quoted, `%e` escaped, `%d`, `%f`/`%.Nf`, `%%`).
+- `mysql_errno(handle)`.
+
+Callback receives `resultIndex`; read it with:
+`cache_get_row_count`, `cache_get_field_count`, `cache_get_value_name`,
+`cache_get_value_name_int`, `cache_get_value_name_float`,
+`cache_get_value_index_int`, `cache_insert_id`, `cache_delete`.
+
+```lua
+local db = sa.mysql_open("user:pass@tcp(127.0.0.1:3306)/samp")
+sa.mysql_tquery(db, sa.mysql_format(db, "SELECT name FROM players WHERE id = %d", 1), "onResult")
+function onResult(idx)
+    if sa.cache_get_row_count(idx) > 0 then
+        sa.Log(sa.cache_get_value_name(idx, 0, "name"))
+    end
+    sa.cache_delete(idx)
+end
+```
+
+---
+
+## Format, String & sscanf (Block 3)
+
+- `sa.format(fmt, ...)` — Pawn printf: `%s %d %i %f %.Nf %x %c %%`; `{RRGGBB}` colour codes pass through.
+- String shims: `strcmp`, `strval`, `strcat`, `strlen`, `strfind`, `strmid`, `strins`, `strdel`, `strpack`, `strunpack`.
+- `sa.sscanf(input, format, ...)` → `(failCount, ...values)` with `%d/%i`, `%f`, `%s`, `%s[n]`, `%c`, `%u`.
+- `sa.SHA256_PassHash(password, salt)` → hex SHA-256.
+
+---
+
+## Lifecycle Events (Block 4)
+
+- `onGameModeInit()` — once after the script loads, before players connect.
+- `onGameModeExit()` — on SIGINT/SIGTERM before shutdown.
+- `onPlayerStateChange(playerid, newstate, oldstate)`.
+- `onPlayerKeyStateChange(playerid, newkeys, oldkeys)` — edge-triggered.
+- `onVehicleSpawn(vehicleid)` — on create and respawn.
+
+State constants: `PLAYER_STATE_NONE` (0), `_ONFOOT` (1), `_DRIVER` (2),
+`_PASSENGER` (3), `_EXIT_VEHICLE` (4), `_ENTER_VEHICLE_DRIVER` (5),
+`_ENTER_VEHICLE_PASSENGER` (6), `_WASTED` (7), `_SPAWNED` (8), `_SPECTATING` (9).
