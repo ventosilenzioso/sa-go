@@ -1,0 +1,81 @@
+#include <sago>
+
+// ============================================================
+// Knight (.sa) gamemode skeleton
+// ============================================================
+// Copy this file, rename it, and point server.cfg at it:
+//     gamemode0 myserver 1
+// The server transpiles .sa to Lua at load time.
+// ============================================================
+
+system::config() {
+    server.name = "Knight Server";
+    server.gamemode = "knight 1";
+    server.max_players = 50;
+    server.port = 7777;
+    server.language = "English";
+    server.weather = 10;
+    server.world_time = 12;
+    server.gravity = 0.008;
+    server.stream_distance = 300.0;
+    server.announce = false;
+};
+
+system::start() {
+    sa.DisableInteriorEnterExits();
+    server.set_gamemode_text("Knight");
+
+    // Classes: skin, x, y, z, angle, weapon, ammo
+    player.add_class(0, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+    player.add_class(7, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+};
+
+system::stop() {
+    // Persist state here.
+};
+
+player::connect() {
+    self.message("Welcome, {self.name}!");
+};
+
+player::spawn() {
+    self.set_health(100.0);
+    self.set_armour(0.0);
+    self.message("Spawned. Money: {self.money}");
+};
+
+player::death(Player killer) {
+    if (killer != null) {
+        self.message("Killed by {killer.name}.");
+    } else {
+        self.message("You died.");
+    }
+};
+
+player::chat(string message) {
+    return true;
+};
+
+player::command("/help") {
+    self.message("Commands: /heal /stats /tp <x> <y> <z>");
+};
+
+player::command("/heal") {
+    self.set_health(100.0);
+    self.set_armour(100.0);
+    self.message("Healed.");
+};
+
+player::command("/stats") {
+    self.message("Name: {self.name} | HP: {self.health} | Money: {self.money} | Score: {self.score}");
+};
+
+player::command("/tp", float x, float y, float z) {
+    self.set_position(x, y, z);
+    self.message("Teleported to {x}, {y}, {z}.");
+};
+
+timer::every(60s) {
+    // Called once per minute. `self` is the broadcast pseudo-object here.
+    // self.message("Server uptime tick.");
+};

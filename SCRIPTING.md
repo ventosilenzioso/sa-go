@@ -773,3 +773,72 @@ end
 State constants: `PLAYER_STATE_NONE` (0), `_ONFOOT` (1), `_DRIVER` (2),
 `_PASSENGER` (3), `_EXIT_VEHICLE` (4), `_ENTER_VEHICLE_DRIVER` (5),
 `_ENTER_VEHICLE_PASSENGER` (6), `_WASTED` (7), `_SPAWNED` (8), `_SPECTATING` (9).
+
+---
+
+## Knight Language (.sa) — primary scripting language
+
+Knight is a statically-typed language that compiles to Lua calling the same
+`sa.*` natives. The server loads `.sa` gamemodes natively (transpiled at load
+time). Lua `.lua` gamemodes remain supported.
+
+### File structure
+```
+#include <sago>          // standard header (all sa.* natives available)
+#include <shared.sa>     // custom file in the same directory
+```
+
+### Config and lifecycle
+```
+system::config() { server.name = "My Server"; server.max_players = 100; };
+
+system::start() { sa.DisableInteriorEnterExits(); };
+system::stop()  { };                       // onGameModeExit
+```
+The trailing `;` after an event block is mandatory.
+
+### Events
+```
+player::connect() { self.message("Hi {self.name}!"); };
+player::spawn()   { self.set_health(100.0); };
+player::death(Player killer) {
+    if (killer != null) { killer.send_score(killer.score + 1); }
+};
+player::chat(string message) { return true; };
+player::command("/pay", Player target, int amount) {
+    if (target == null) { self.message("Player not found."); return; }
+    self.money -= amount;
+    target.money += amount;
+};
+player::enter_vehicle(Vehicle car) { };
+player::exit_vehicle(Vehicle car) { };
+world::checkpoint(float x, float y, float z) { };
+textdraw::click(TextDraw td) { };
+dialog::response(int id, bool accepted, string input) { };
+timer::every(60s) { };
+```
+
+### Built-in objects
+`self` (current player), `Player`, `Vehicle`, `Object`, `TextDraw`, `server`.
+Fields map to `sa.Get*/sa.Set*`; methods map to natives:
+```
+self.health = 100;          // sa.SetPlayerHealth(self, 100)
+self.money -= 50;           // sa.GivePlayerMoney(self, -50)
+self.set_position(x, y, z); // sa.SetPlayerPos(self, x, y, z)
+let v = Vehicle.create(411, x, y, z, 0.0, 1, 1);  // sa.CreateVehicle(...)
+```
+
+### String interpolation
+`"Kamu membayar {amount} ke {target.name}."` supports arbitrary expressions.
+Escape literal braces with `\{` and `\}`.
+
+### Types
+`int`, `float`, `string`, `bool`, `Player`, `Vehicle`, `Object`, `TextDraw`,
+`null`. Type checking happens at compile time with line/column errors.
+
+### Compiling manually
+```
+./Bin/sa-go-server -cfg server.cfg -gamemode Gamemodes/bare.sa
+```
+The server compiles `.sa` automatically; a standalone `knight` compiler is also
+available (`go run ./cmd/knight -o out.lua Gamemodes/bare.sa`).

@@ -1,0 +1,148 @@
+#include <sago>
+
+// ============================================================
+// SA:GO Starter Gamemode — Knight (.sa) edition
+// ============================================================
+// This is the default gamemode. It is transpiled to Lua at load time and
+// calls the same sa.* natives as the legacy Lua gamemode (bare.lua).
+// ============================================================
+
+system::config() {
+    server.name = "SA:GO Server";
+    server.gamemode = "bare 1";
+    server.max_players = 50;
+    server.port = 7777;
+    server.language = "English";
+    server.weather = 10;
+    server.world_time = 12;
+    server.gravity = 0.008;
+    server.stream_distance = 300.0;
+    server.announce = false;
+};
+
+// ---- World setup (runs once) ----
+system::start() {
+    sa.DisableInteriorEnterExits();
+    server.set_gamemode_text("SA:GO 1");
+
+    // Spawn classes: skin, x, y, z, angle, weapon, ammo
+    player.add_class(0, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+    player.add_class(7, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+    player.add_class(21, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+    player.add_class(29, 1958.4, 1343.2, 15.4, 270.0, 24, 50);
+
+    sa.SetWeather(10);
+    sa.SetWorldTime(12);
+    sa.SetGravity(0.008);
+};
+
+// TextDraws are created once at load time (module-level declarations), then
+// shown per-player on spawn.
+let brand_td = TextDraw.create(530, 8, "SA:GO");
+sa.TextDrawLetterSize(brand_td, 0.4, 1.6);
+sa.TextDrawColor(brand_td, 0xFFFFFFFF);
+
+let help_td = TextDraw.create(8, 8, "Type /help for commands");
+sa.TextDrawLetterSize(help_td, 0.28, 1.1);
+sa.TextDrawColor(help_td, 0x00FF00FF);
+
+// ---- Player lifecycle ----
+player::connect() {
+    self.message("Welcome to SA:GO, {self.name}!");
+    self.set_camera_pos(1978.0, 1343.0, 35.0);
+    self.set_camera_look_at(1978.0, 1343.0, 15.0, 1);
+};
+
+player::spawn() {
+    self.set_camera_behind();
+    self.set_health(100.0);
+    self.set_armour(0.0);
+
+    self.show_textdraw(brand_td);
+    self.show_textdraw(help_td);
+
+    // Radar blip at spawn.
+    self.set_map_icon(10, 1958.4, 1343.2, 15.4, 0, 0x00FF00FF, 1);
+    self.message("Spawned. HP: {self.health} | Money: {self.money}");
+};
+
+player::death(Player killer) {
+    if (killer != null) {
+        self.message("You were killed by {killer.name}.");
+        killer.send_score(killer.score + 1);
+    } else {
+        self.message("You died.");
+    }
+};
+
+player::chat(string message) {
+    return true;
+};
+
+// ---- Commands ----
+player::command("/help") {
+    self.message("Commands: /heal /stats /tp <x> <y> <z> /pay <player> <amount> /money <amount> /skin <id> /giveweapon <id> <ammo> /anim <lib> <name> /dance /camera");
+};
+
+player::command("/heal") {
+    self.set_health(100.0);
+    self.set_armour(100.0);
+    self.message("Healed.");
+};
+
+player::command("/stats") {
+    self.message("Name: {self.name} | HP: {self.health} | Armour: {self.armour} | Money: {self.money} | Score: {self.score}");
+};
+
+player::command("/tp", float x, float y, float z) {
+    self.set_position(x, y, z);
+    self.message("Teleported to {x}, {y}, {z}.");
+};
+
+player::command("/pay", Player target, int amount) {
+    if (target == null) {
+        self.message("Player not found.");
+        return;
+    }
+    if (amount <= 0) {
+        self.message("Amount must be > 0.");
+        return;
+    }
+    if (self.money < amount) {
+        self.message("Not enough money.");
+        return;
+    }
+    self.money -= amount;
+    target.money += amount;
+    self.message("Paid {amount} to {target.name}.");
+    target.message("Received {amount} from {self.name}.");
+};
+
+player::command("/money", int amount) {
+    self.money += amount;
+    self.message("Money changed by {amount}.");
+};
+
+player::command("/skin", int skin) {
+    self.set_skin(skin);
+    self.message("Skin changed to {skin}.");
+};
+
+player::command("/giveweapon", int weapon, int ammo) {
+    self.give_weapon(weapon, ammo);
+    self.message("Weapon {weapon} given with {ammo} ammo.");
+};
+
+player::command("/anim", string lib, string name) {
+    sa.ApplyPlayerAnimation(self.id, lib, name, 4.1, true, false, false, false, 0);
+    self.message("Animation {lib}/{name} applied.");
+};
+
+player::command("/dance") {
+    sa.SetPlayerSpecialAction(self.id, sa.SPECIAL_ACTION_DANCE1);
+};
+
+player::command("/camera") {
+    sa.TogglePlayerWidescreen(self.id, true);
+    self.message("Widescreen toggled.");
+};

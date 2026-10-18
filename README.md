@@ -86,7 +86,7 @@ SA:GO provides a comprehensive suite of built-in features, enabling developers t
 
 ## Out-of-the-Box Commands & Lua Scripting
 
-SA:GO comes ready to run with an official starter gamemode (`Gamemodes/bare.lua`) featuring essential gameplay and moderation commands:
+SA:GO comes ready to run with an official starter gamemode in **Knight** (`Gamemodes/bare.sa`), featuring essential gameplay and moderation commands. The legacy Lua gamemode (`Gamemodes/bare.lua`) is still included for reference; the server transpiles `.sa` to Lua at load time:
 
 - `/veh <model> <color1> <color2>` — Spawns any vehicle model directly at the player's position.
 - `/giveweapon <id> <ammo>` — Equips a player with any valid weapon ID and ammunition count.
@@ -124,7 +124,7 @@ Getting your SA:GO server running takes less than a minute on any modern platfor
 3. Edit `server.cfg` to set your desired server name, player slots, and RCON password.
 4. Start the server:
    ```bash
-   ./Bin/sa-go-server -cfg server.cfg -gamemode Gamemodes/bare.lua
+   ./Bin/sa-go-server -cfg server.cfg -gamemode Gamemodes/bare.sa
    ```
 
 ### Windows
@@ -132,7 +132,7 @@ Getting your SA:GO server running takes less than a minute on any modern platfor
 2. Edit `server.cfg` using any text editor.
 3. Launch the server from Command Prompt, PowerShell, or by double-clicking:
    ```cmd
-   Bin\sa-go-server.exe -cfg server.cfg -gamemode Gamemodes/bare.lua
+   Bin\sa-go-server.exe -cfg server.cfg -gamemode Gamemodes/bare.sa
    ```
 
 ---
